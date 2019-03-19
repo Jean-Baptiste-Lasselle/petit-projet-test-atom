@@ -40,13 +40,21 @@ RUN usermod -aG $SUODERS_SYSTEM_GROUP $PEGASUS_USER_NAME
 # RUN usermod -aG sudo $PEGASUS_USER_NAME_USER_NAME
 
 
+USER $PEGASUS_USER_NAME
 
+RUN echo " "
+RUN echo " Vérif existence répertoire home du user"
+RUN echo " "
+RUN echo " Qui suis-je ? $(whoami)"
+RUN echo " Ma maison est : [$HOME]"
+RUN ls -all $HOME
+RUN echo " "
 
-
+USER root
 
 # maison application
 RUN mkdir /calendar-app
-WORKDIR /calendar-app
+
 # doit appartenir au user $PEGASUS_USER_NAME
 RUN chown -R $PEGASUS_USER_NAME:$SUODERS_SYSTEM_GROUP /calendar-app
 
@@ -68,7 +76,14 @@ RUN echo "export PATH=\$PATH:/home/\$PEGASUS_USER_NAME/.meteor" >> /etc/profile
 # RUN mkdir -p /home/$PEGASUS_USER_NAME/.meteor
 # RUN chown -R $PEGASUS_USER_NAME:$SUODERS_SYSTEM_GROUP /home/$PEGASUS_USER_NAME/.meteor
 
+
+
 USER $PEGASUS_USER_NAME
+
+WORKDIR /calendar-app
+
+RUN git clone $URI_REPO_GIT_APPLICATION_TESTEE
+
 
 RUN meteor --version
 RUN echo " "
@@ -79,9 +94,6 @@ RUN echo " Ma maison est : [$HOME]"
 RUN ls -all $HOME
 RUN echo " "
 
-
 EXPOSE 3000
-
-RUN git clone $URI_REPO_GIT_APPLICATION_TESTEE
 
 CMD ["meteor", "run"]
