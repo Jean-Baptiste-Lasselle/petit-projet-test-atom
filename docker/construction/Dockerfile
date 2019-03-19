@@ -26,7 +26,7 @@ RUN echo "# + Création de l'utilisateur Linux Pegasus           $PEGASUS_USER_N
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 
 # quietly add a user without password
-RUN useradd --shell /bin/sh --home-dir /home/$PEGASUS_USER_NAME_USER_NAME $PEGASUS_USER_NAME
+RUN useradd --shell /bin/sh --home-dir /home/$PEGASUS_USER_NAME $PEGASUS_USER_NAME
 
 # set password
 RUN echo "$PEGASUS_USER_NAME:$PEGASUS_USER_PWD" | chpasswd
@@ -49,7 +49,7 @@ WORKDIR /calendar-app
 
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 # RUN echo "# + Installation du Meteor Framework, version [$VERSION_METEOR_FRAMEWORK] + #"
-RUN echo "# + Installation du Meteor Framework, version [$MARGUERITE_METEOR_VERSION] + #"
+RUN echo "# + Installation du Meteor Framework                             + #"
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 
 # curl https://install.meteor.com/ | sh
@@ -60,7 +60,7 @@ USER root
 RUN echo "export PATH=\$PATH:\$HOME/.meteor" >> /etc/profile
 # Le workspace doit appartenir au user marguerite: un nouveau répertoire a été créé par root dans le répertoire $WORKSPACE_IDE
 RUN chown -R $PEGASUS_USER_NAME:$SUODERS_SYSTEM_GROUP /calendar-app
-RUN chown -R $PEGASUS_USER_NAME:$SUODERS_SYSTEM_GROUP $HOME/.meteor
+RUN chown -R $PEGASUS_USER_NAME:$SUODERS_SYSTEM_GROUP /home/$PEGASUS_USER_NAME/.meteor
 
 USER $PEGASUS_USER_NAME
 RUN meteor --version
