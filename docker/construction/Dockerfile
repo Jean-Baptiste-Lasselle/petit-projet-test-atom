@@ -57,7 +57,7 @@ RUN sh -c "$(curl -sSL https://install.meteor.com/)"
 # On doit maintenant faire en sorte que les users aient tous dans leur profil, l'ajout dans PATH, de
 # la valeur du chemin de l'exécutable meteor :  PATH=$PATH:~/opt/bin dans le PATH
 USER root
-RUN echo "export PATH=\$PATH:\$HOME/.meteor" >> /etc/profile
+RUN echo "export PATH=\$PATH:/home/\$PEGASUS_USER_NAME/.meteor" >> /etc/profile
 # Le workspace doit appartenir au user marguerite: un nouveau répertoire a été créé par root dans le répertoire $WORKSPACE_IDE
 RUN chown -R $PEGASUS_USER_NAME:$SUODERS_SYSTEM_GROUP /calendar-app
 RUN chown -R $PEGASUS_USER_NAME:$SUODERS_SYSTEM_GROUP /home/$PEGASUS_USER_NAME/.meteor
