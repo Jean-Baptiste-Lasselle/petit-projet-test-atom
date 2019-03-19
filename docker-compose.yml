@@ -6,7 +6,7 @@ services:
     container_name: "calendar.kytes.io"
     image: jbl/calendar:1.0.0
     build: 
-      context: ./docker/construction/
+      context: ./docker/construction/mongodb
       args:
         - PEGASUS_USER_NAME=pegasus
         - PEGASUS_USER_PWD=pegasus
