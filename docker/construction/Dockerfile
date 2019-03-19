@@ -18,6 +18,9 @@ ENV PEGASUS_USER_PWD=$PEGASUS_USER_PWD
 ARG URI_REPO_GIT_APPLICATION_TESTEE=https://github.com/icharlie/mCalendar
 
 
+
+
+
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 RUN echo "# + Création de l'utilisateur Linux Pegasus           $PEGASUS_USER_NAME           + #"
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
@@ -47,14 +50,29 @@ RUN ls -all $HOME
 RUN echo " "
 
 
-# installation de meteor 
-RUN curl https://install.meteor.com/ | sh
+# maison application
+RUN mkdir /calendar-app
+WORKDIR /calendar-app
+
+RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
+# RUN echo "# + Installation du Meteor Framework, version [$VERSION_METEOR_FRAMEWORK] + #"
+RUN echo "# + Installation du Meteor Framework, version [$MARGUERITE_METEOR_VERSION] + #"
+RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
+
+# curl https://install.meteor.com/ | sh
+RUN sh -c "$(curl -sSL https://install.meteor.com/)"
+# On doit maintenant faire en sorte que les users aient tous dans leur profil, l'ajout dans PATH, de
+# la valeur du chemin de l'exécutable meteor :  PATH=$PATH:~/opt/bin dans le PATH
+USER root
+RUN echo "export PATH=\$PATH:\$HOME/.meteor" >> /etc/profile
+# Le workspace doit appartenir au user marguerite: un nouveau répertoire a été créé par root dans le répertoire $WORKSPACE_IDE
+RUN chown -R $PEGASUS_USER_NAME:$SUODERS_SYSTEM_GROUP /calendar-app
+USER $PEGASUS_USER_NAME
 RUN meteor --version
 
 
-# code application
-RUN mkdir /calendar-app
-WORKDIR /calendar-app
+EXPOSE 3000
+
 RUN git clone $URI_REPO_GIT_APPLICATION_TESTEE
 
 CMD ["meteor", "run"]
