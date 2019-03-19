@@ -23,7 +23,7 @@ RUN echo "# + Création de l'utilisateur Linux Pegasus           $PEGASUS_USER_N
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 
 # quietly add a user without password
-RUN useradd --shell /bin/sh --home-dir /home/$PEGASUS_USER_NAME_USER_NAME $PEGASUS_USER_NAME_USER_NAME
+RUN useradd --shell /bin/sh --home-dir /home/$PEGASUS_USER_NAME_USER_NAME $PEGASUS_USER_NAME
 
 # set password
 RUN echo "$PEGASUS_USER_NAME:$PEGASUS_USER_PWD" | chpasswd
@@ -36,7 +36,7 @@ RUN usermod -aG $SUODERS_SYSTEM_GROUP $PEGASUS_USER_NAME
 # Pour Debian / Ubuntu le groupe "wheel"  n'existe pas, mais c'est le groupe "sudo" qui existe, et qu'il faut utiliser
 # RUN usermod -aG sudo $PEGASUS_USER_NAME_USER_NAME
 
-USER $PEGASUS_USER_NAME_USER_NAME
+USER $PEGASUS_USER_NAME
 
 RUN echo " "
 RUN echo " Vérif existence répertoire home du user"
