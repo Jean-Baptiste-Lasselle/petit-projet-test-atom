@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  calendar_service:
+    # hostname: 'calendar.kytes.io'
+    container_name: "calendar.kytes.io"
+    image: jbl/calendar:1.0.0
+    build: 
+      context: ./docker/construction/
+#       args:
+        # ENV. USINE LOGICIELLE JAUNE
+        # ADD .cle.privee.usine.jaune ./.secret
+        # - YELLOW_GIT_SECRET=$YELLOW_GIT_SECRET
+        
+# + / - => Les volumes 
+#          donc conflit de droits avec le SGF de l'hôte docker
+#     volumes:
+#       - $AVOIR:$IN_CONTAINER_WHATEVER_DIRECTORY:rw
+#     environment:
+#       - YELLOW_OPERATOR_USER_NAME=$YELLOW_OPERATOR_USER_NAME
+    ports:
+      # - $NUM_PORT_ECOUTE_EXTERIEUR_AU_CONTENEUR:$NUM_PORT_ECOUTE_FRONTEND_APPLI_VOTE_IN_CONTAINER
+      - 7000:3000
+    expose:
+      - 3000/tcp
+      # - 8000/tcp
+      # pas de dépendance directe entre front et back : 
+      # => le front est une SPA,si elle peut être servie, elle le sera, et elle affichera une belle page "patientez, le backend s'initialise..."
+#     depends_on:
+      # - another_container
+    networks:
+      - "reseau_devops"
+    restart: always
+networks:
+  # donc dans le fichier ["./.env]", on doit tropuver la déclaration de variable [NOM_DU_RESEAU_DEMO_MJML=reseau_vote_jaune]
+  reseau_devops:
+driver: bridge
