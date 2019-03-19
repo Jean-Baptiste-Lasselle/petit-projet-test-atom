@@ -92,7 +92,6 @@ RUN chmod +x ./start-app.sh
 RUN git clone $URI_REPO_GIT_APPLICATION_TESTEE
 
 
-RUN export PATH=$PATH:$HOME/.meteor && meteor --version
 RUN echo " "
 RUN echo " Vérif existence répertoire home du user"
 RUN echo " "
