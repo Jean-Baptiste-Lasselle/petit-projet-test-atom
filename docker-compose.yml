@@ -34,4 +34,4 @@ services:
 networks:
   # donc dans le fichier ["./.env]", on doit tropuver la déclaration de variable [NOM_DU_RESEAU_DEMO_MJML=reseau_vote_jaune]
   reseau_devops:
-driver: bridge
+  driver: bridge
