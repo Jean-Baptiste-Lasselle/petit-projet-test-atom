@@ -49,7 +49,7 @@ services:
     # ---- 
     # NOM_DU_REPLICASET_MONGO=marguerite_rs0
     # ---- 
-    command: mongod --smallfiles --oplogSize 128 --replSet rspegasuscal
+    command: mongod  --port 27016 --smallfiles --oplogSize 128 --replSet rspegasuscal 
     ports:
       - 27025:27016
     expose:
