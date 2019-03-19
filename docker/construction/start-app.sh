@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # set -euxo pipefail
-cd /calendar-app
+# cd /calendar-app
 
 echo " "
 echo " Vérif existence répertoire home du user"
