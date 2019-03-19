@@ -6,7 +6,7 @@ services:
     container_name: "calendar.kytes.io"
     image: jbl/calendar:1.0.0
     build: 
-      context: ./docker/construction/mongodb
+      context: ./docker/construction/
       args:
         - PEGASUS_USER_NAME=pegasus
         - PEGASUS_USER_PWD=pegasus
@@ -38,7 +38,7 @@ services:
   calendar_mongo:
     # image: mongo:latest
     image: $IMAGES_MARGUERITE_COMPANY_NAME/mongo:1.0.0    
-    build: ./construction/mongodb/
+    build: ./construction/mongodb/mongodb
     # hostname: "mongo"
     container_name: $NOM_CONTENEUR_MONGO
     volumes:
