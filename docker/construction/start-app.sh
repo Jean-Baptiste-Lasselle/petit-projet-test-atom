@@ -1,6 +1,9 @@
 #!/bin/bash
 
 # set -euxo pipefail
+
+export PATH=$PATH:$HOME/.meteor
+
 # cd /calendar-app
 
 echo " "
