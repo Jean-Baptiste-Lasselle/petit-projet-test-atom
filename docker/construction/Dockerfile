@@ -19,7 +19,7 @@ ARG URI_REPO_GIT_APPLICATION_TESTEE=https://github.com/icharlie/mCalendar
 
 
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
-RUN echo "# + Création de l'utilisateur Linux Pegasus           $PEGASUS_USER_NAME_USER_NAME           + #"
+RUN echo "# + Création de l'utilisateur Linux Pegasus           $PEGASUS_USER_NAME           + #"
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 
 # quietly add a user without password
@@ -32,7 +32,7 @@ RUN echo "$PEGASUS_USER_NAME:$PEGASUS_USER_PWD" | chpasswd
 
 # Il existe aussi la possibilité de créer un groupe, et de définir ce groupe comme un groupe administrateur dans /etc/sudoers
 
-RUN usermod -aG $SUODERS_SYSTEM_GROUP $PEGASUS_USER_NAME_USER_NAME
+RUN usermod -aG $SUODERS_SYSTEM_GROUP $PEGASUS_USER_NAME
 # Pour Debian / Ubuntu le groupe "wheel"  n'existe pas, mais c'est le groupe "sudo" qui existe, et qu'il faut utiliser
 # RUN usermod -aG sudo $PEGASUS_USER_NAME_USER_NAME
 
