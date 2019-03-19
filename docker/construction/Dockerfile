@@ -82,13 +82,13 @@ RUN echo "export PATH=\$PATH:\$HOME/.meteor" >> /etc/profile
 # RUN mkdir -p /home/$PEGASUS_USER_NAME/.meteor
 # RUN chown -R $PEGASUS_USER_NAME:$SUODERS_SYSTEM_GROUP /home/$PEGASUS_USER_NAME/.meteor
 
-
-
-USER $PEGASUS_USER_NAME
-
 WORKDIR /calendar-app
 ADD start-app.sh .
 RUN chmod +x ./start-app.sh
+
+USER $PEGASUS_USER_NAME
+
+
 RUN git clone $URI_REPO_GIT_APPLICATION_TESTEE
 
 
