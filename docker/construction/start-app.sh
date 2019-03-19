@@ -22,4 +22,6 @@ meteor --version
 
 meteor reset
 
+meteor update
+
 meteor run
