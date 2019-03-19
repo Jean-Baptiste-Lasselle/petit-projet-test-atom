@@ -89,7 +89,7 @@ RUN chmod +x ./start-app.sh
 USER $PEGASUS_USER_NAME
 
 
-RUN git clone $URI_REPO_GIT_APPLICATION_TESTEE
+RUN git clone $URI_REPO_GIT_APPLICATION_TESTEE . 
 
 
 RUN echo " "
