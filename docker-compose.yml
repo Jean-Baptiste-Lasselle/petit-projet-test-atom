@@ -8,7 +8,8 @@ services:
     build: 
       context: ./docker/construction/
 #       args:
-        # ENV. USINE LOGICIELLE JAUNE
+          - PEGASUS_USER_NAME=pegasus
+          - PEGASUS_USER_PWD=pegasus
         # ADD .cle.privee.usine.jaune ./.secret
         # - YELLOW_GIT_SECRET=$YELLOW_GIT_SECRET
         
