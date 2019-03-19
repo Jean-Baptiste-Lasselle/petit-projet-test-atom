@@ -37,7 +37,7 @@ services:
     restart: always
   calendar_mongo:
     # image: mongo:latest
-    image: $IMAGES_MARGUERITE_COMPANY_NAME/mongo:1.0.0    
+    image: kytes.io/mongo:1.0.0    
     build: ./docker/construction/mongodb
     # hostname: "mongo"
     container_name: $NOM_CONTENEUR_MONGO
