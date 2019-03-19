@@ -16,8 +16,9 @@ services:
 #          donc conflit de droits avec le SGF de l'hôte docker
 #     volumes:
 #       - $AVOIR:$IN_CONTAINER_WHATEVER_DIRECTORY:rw
-#     environment:
-#       - YELLOW_OPERATOR_USER_NAME=$YELLOW_OPERATOR_USER_NAME
+    environment:
+      - PEGASUS_USER_NAME=pegasus
+      - PEGASUS_USER_PWD=pegasus
     ports:
       # - $NUM_PORT_ECOUTE_EXTERIEUR_AU_CONTENEUR:$NUM_PORT_ECOUTE_FRONTEND_APPLI_VOTE_IN_CONTAINER
       - 7000:3000
