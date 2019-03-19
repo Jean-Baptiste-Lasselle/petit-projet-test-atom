@@ -70,7 +70,7 @@ RUN sh -c "$(curl -sSL https://install.meteor.com/)"
 # On doit maintenant faire en sorte que les users aient tous dans leur profil, l'ajout dans PATH, de
 # la valeur du chemin de l'exécutable meteor :  PATH=$PATH:~/opt/bin dans le PATH
 USER root
-RUN echo "export PATH=\$PATH:/home/\$PEGASUS_USER_NAME/.meteor" >> /etc/profile
+RUN echo "export PATH=\$PATH:/home/\$HOME/.meteor" >> /etc/profile
 
 # Je prends la liberté de créer dès maintenant le répertoire
 # RUN mkdir -p /home/$PEGASUS_USER_NAME/.meteor
