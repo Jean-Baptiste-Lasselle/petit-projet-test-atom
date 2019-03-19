@@ -20,4 +20,6 @@ echo " "
 
 meteor --version
 
+meteor reset
+
 meteor run
