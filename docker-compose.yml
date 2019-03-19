@@ -51,7 +51,7 @@ services:
     # ---- 
     command: mongod --smallfiles --oplogSize 128 --replSet rspegasuscal
     ports:
-      - 27018:27017
+      - 27025:27017
     expose:
       - 27017
     networks:
