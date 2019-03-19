@@ -1,14 +1,17 @@
 #!/bin/bash
 
-set -euxo pipefail
+# set -euxo pipefail
 
-RUN echo " "
-RUN echo " Vérif existence répertoire home du user"
-RUN echo " "
-RUN echo " Qui suis-je ? $(whoami)"
-RUN echo " Ma maison est : [$HOME]"
-RUN ls -all $HOME
-RUN echo " "
+echo " "
+echo " Vérif existence répertoire home du user"
+echo " "
+echo " Qui suis-je ? $(whoami)"
+echo " Où suis-je ? $(pwd)"
+echo " Ma maison est : [$HOME]"
+ls -all $HOME
+echo " "
+
+
 
 meteor --version
 
