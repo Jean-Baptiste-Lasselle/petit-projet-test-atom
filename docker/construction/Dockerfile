@@ -88,8 +88,8 @@ RUN chmod +x ./start-app.sh
 
 USER $PEGASUS_USER_NAME
 
-
-RUN git clone $URI_REPO_GIT_APPLICATION_TESTEE . 
+RUN mkdir -p server
+RUN git clone $URI_REPO_GIT_APPLICATION_TESTEE server
 
 
 RUN echo " "
@@ -99,6 +99,8 @@ RUN echo " Qui suis-je ? $(whoami)"
 RUN echo " Ma maison est : [$HOME]"
 RUN ls -all $HOME
 RUN echo " "
+
+WORKDIR /calendar-app/server
 
 EXPOSE 3000
 
