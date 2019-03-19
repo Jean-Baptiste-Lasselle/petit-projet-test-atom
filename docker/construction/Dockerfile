@@ -74,7 +74,7 @@ RUN echo "export PATH=\$PATH:\$HOME/.meteor" >> /etc/profile
 
 # Je prends la liberté de créer dès maintenant le répertoire
 # RUN mkdir -p /home/$PEGASUS_USER_NAME/.meteor
-# RUN chown -R $PEGASUS_USER_NAME:$SUODERS_SYSTEM_GROUP /home/$PEGASUS_USER_NAME/.meteor
+RUN chown -R $PEGASUS_USER_NAME:$SUODERS_SYSTEM_GROUP /home/$PEGASUS_USER_NAME/.meteor
 
 
 
