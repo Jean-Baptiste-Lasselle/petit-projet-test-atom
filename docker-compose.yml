@@ -20,8 +20,8 @@ services:
     environment:
       - PEGASUS_USER_NAME=pegasus
       - PEGASUS_USER_PWD=pegasus
-      - MONGO_URL=mongodb://calendar_mongo:27017/pegasuscalendar
-      - MONGO_OPLOG_URL=mongodb://calendar_mongo:27017/local?replicaSet=rspegasuscal
+      - MONGO_URL=mongodb://calendar_mongo:27016/pegasuscalendar
+      - MONGO_OPLOG_URL=mongodb://calendar_mongo:27016/local?replicaSet=rspegasuscal
     ports:
       # - $NUM_PORT_ECOUTE_EXTERIEUR_AU_CONTENEUR:$NUM_PORT_ECOUTE_FRONTEND_APPLI_VOTE_IN_CONTAINER
       - 7000:3000
@@ -40,10 +40,10 @@ services:
     image: kytes.io/mongo:1.0.0    
     build: ./docker/construction/mongodb
     # hostname: "mongo"
-    container_name: $NOM_CONTENEUR_MONGO
+    container_name: calendar_mongo
     volumes:
-     - ./marguerite/mongodb/data:/data/db
-     - ./marguerite/mongodb/dump:/dump
+     - ./pegasus/mongodb/data:/data/db
+     - ./pegasus/mongodb/dump:/dump
     # ---- 
     # - contenu "./.env" : 
     # ---- 
@@ -51,9 +51,9 @@ services:
     # ---- 
     command: mongod --smallfiles --oplogSize 128 --replSet rspegasuscal
     ports:
-      - 27025:27017
+      - 27025:27016
     expose:
-      - 27017
+      - 27016
     networks:
       - "reseau_devops"
     #       devops:
