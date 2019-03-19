@@ -102,4 +102,4 @@ RUN echo " "
 
 EXPOSE 3000
 
-CMD ["start-app.sh"]
+CMD ["/calendar-app/start-app.sh"]
