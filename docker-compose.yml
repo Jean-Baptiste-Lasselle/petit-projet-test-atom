@@ -20,6 +20,8 @@ services:
     environment:
       - PEGASUS_USER_NAME=pegasus
       - PEGASUS_USER_PWD=pegasus
+      - MONGO_URL=mongodb://calendar_mongo:27017/pegasuscalendar
+      - MONGO_OPLOG_URL=mongodb://calendar_mongo:27017/local?replicaSet=rspegasuscal
     ports:
       # - $NUM_PORT_ECOUTE_EXTERIEUR_AU_CONTENEUR:$NUM_PORT_ECOUTE_FRONTEND_APPLI_VOTE_IN_CONTAINER
       - 7000:3000
@@ -32,6 +34,30 @@ services:
       # - another_container
     networks:
       - "reseau_devops"
+    restart: always
+  calendar_mongo:
+    # image: mongo:latest
+    image: $IMAGES_MARGUERITE_COMPANY_NAME/mongo:1.0.0    
+    build: ./construction/mongodb/
+    # hostname: "mongo"
+    container_name: $NOM_CONTENEUR_MONGO
+    volumes:
+     - ./marguerite/mongodb/data:/data/db
+     - ./marguerite/mongodb/dump:/dump
+    # ---- 
+    # - contenu "./.env" : 
+    # ---- 
+    # NOM_DU_REPLICASET_MONGO=marguerite_rs0
+    # ---- 
+    command: mongod --smallfiles --oplogSize 128 --replSet rspegasuscal
+    ports:
+      - 27018:27017
+    expose:
+      - 27017
+    networks:
+      - "reseau_devops"
+    #       devops:
+    #         ipv4_address: 192.168.160.6
     restart: always
 networks:
   # donc dans le fichier ["./.env]", on doit tropuver la déclaration de variable [NOM_DU_RESEAU_DEMO_MJML=reseau_vote_jaune]
