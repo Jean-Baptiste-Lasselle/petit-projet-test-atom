@@ -60,6 +60,7 @@ USER root
 RUN echo "export PATH=\$PATH:\$HOME/.meteor" >> /etc/profile
 # Le workspace doit appartenir au user marguerite: un nouveau répertoire a été créé par root dans le répertoire $WORKSPACE_IDE
 RUN chown -R $PEGASUS_USER_NAME:$SUODERS_SYSTEM_GROUP /calendar-app
+RUN chown -R $PEGASUS_USER_NAME:$SUODERS_SYSTEM_GROUP $HOME/.meteor
 
 USER $PEGASUS_USER_NAME
 RUN meteor --version
