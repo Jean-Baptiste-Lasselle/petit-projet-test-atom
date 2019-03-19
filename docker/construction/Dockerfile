@@ -87,11 +87,12 @@ RUN echo "export PATH=\$PATH:\$HOME/.meteor" >> /etc/profile
 USER $PEGASUS_USER_NAME
 
 WORKDIR /calendar-app
-
+ADD start-app.sh .
+RUN chmod +x ./start-app.sh
 RUN git clone $URI_REPO_GIT_APPLICATION_TESTEE
 
 
-RUN meteor --version
+RUN export PATH=$PATH:$HOME/.meteor && meteor --version
 RUN echo " "
 RUN echo " Vérif existence répertoire home du user"
 RUN echo " "
@@ -102,4 +103,4 @@ RUN echo " "
 
 EXPOSE 3000
 
-CMD ["meteor", "run"]
+CMD ["start-app.sh"]
