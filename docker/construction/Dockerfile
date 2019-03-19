@@ -18,7 +18,7 @@ ENV PEGASUS_USER_PWD=$PEGASUS_USER_PWD
 ARG URI_REPO_GIT_APPLICATION_TESTEE=https://github.com/icharlie/mCalendar
 
 
-
+RUN yum update -y && yum install -y git
 
 
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
