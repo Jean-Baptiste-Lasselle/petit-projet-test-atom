@@ -19,7 +19,7 @@ ARG URI_REPO_GIT_APPLICATION_TESTEE=https://github.com/icharlie/mCalendar
 
 
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
-RUN echo "# + Création de l'utilisateur Linux Pegasus                      + #"
+RUN echo "# + Création de l'utilisateur Linux Pegasus           $PEGASUS_USER_NAME_USER_NAME           + #"
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 
 # quietly add a user without password
