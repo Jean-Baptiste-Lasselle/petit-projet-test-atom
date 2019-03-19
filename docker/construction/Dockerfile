@@ -23,7 +23,7 @@ RUN echo "# + Création de l'utilisateur Linux Pegasus                      + #"
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 
 # quietly add a user without password
-RUN useradd --shell /bin/sh --home /home/$PEGASUS_USER_NAME_USER_NAME $PEGASUS_USER_NAME_USER_NAME
+RUN useradd --shell /bin/sh --home-dir /home/$PEGASUS_USER_NAME_USER_NAME $PEGASUS_USER_NAME_USER_NAME
 
 # set password
 RUN echo "$PEGASUS_USER_NAME:$PEGASUS_USER_PWD" | chpasswd
