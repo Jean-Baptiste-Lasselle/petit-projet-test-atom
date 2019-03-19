@@ -43,9 +43,14 @@ RUN usermod -aG $SUODERS_SYSTEM_GROUP $PEGASUS_USER_NAME
 
 
 
+
 # maison application
 RUN mkdir /calendar-app
 WORKDIR /calendar-app
+# doit appartenir au user $PEGASUS_USER_NAME
+RUN chown -R $PEGASUS_USER_NAME:$SUODERS_SYSTEM_GROUP /calendar-app
+
+USER $PEGASUS_USER_NAME
 
 RUN echo "# ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ #"
 # RUN echo "# + Installation du Meteor Framework, version [$VERSION_METEOR_FRAMEWORK] + #"
@@ -58,11 +63,13 @@ RUN sh -c "$(curl -sSL https://install.meteor.com/)"
 # la valeur du chemin de l'exécutable meteor :  PATH=$PATH:~/opt/bin dans le PATH
 USER root
 RUN echo "export PATH=\$PATH:/home/\$PEGASUS_USER_NAME/.meteor" >> /etc/profile
-# Le workspace doit appartenir au user marguerite: un nouveau répertoire a été créé par root dans le répertoire $WORKSPACE_IDE
-RUN chown -R $PEGASUS_USER_NAME:$SUODERS_SYSTEM_GROUP /calendar-app
+
+# Je prends la liberté de créer dès maintenant le répertoire
+# RUN mkdir -p /home/$PEGASUS_USER_NAME/.meteor
 RUN chown -R $PEGASUS_USER_NAME:$SUODERS_SYSTEM_GROUP /home/$PEGASUS_USER_NAME/.meteor
 
 USER $PEGASUS_USER_NAME
+
 RUN meteor --version
 RUN echo " "
 RUN echo " Vérif existence répertoire home du user"
