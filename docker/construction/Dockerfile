@@ -39,15 +39,8 @@ RUN usermod -aG $SUODERS_SYSTEM_GROUP $PEGASUS_USER_NAME
 # Pour Debian / Ubuntu le groupe "wheel"  n'existe pas, mais c'est le groupe "sudo" qui existe, et qu'il faut utiliser
 # RUN usermod -aG sudo $PEGASUS_USER_NAME_USER_NAME
 
-USER $PEGASUS_USER_NAME
 
-RUN echo " "
-RUN echo " Vérif existence répertoire home du user"
-RUN echo " "
-RUN echo " Qui suis-je ? $(whoami)"
-RUN echo " Ma maison est : [$HOME]"
-RUN ls -all $HOME
-RUN echo " "
+
 
 
 # maison application
@@ -67,8 +60,16 @@ USER root
 RUN echo "export PATH=\$PATH:\$HOME/.meteor" >> /etc/profile
 # Le workspace doit appartenir au user marguerite: un nouveau répertoire a été créé par root dans le répertoire $WORKSPACE_IDE
 RUN chown -R $PEGASUS_USER_NAME:$SUODERS_SYSTEM_GROUP /calendar-app
+
 USER $PEGASUS_USER_NAME
 RUN meteor --version
+RUN echo " "
+RUN echo " Vérif existence répertoire home du user"
+RUN echo " "
+RUN echo " Qui suis-je ? $(whoami)"
+RUN echo " Ma maison est : [$HOME]"
+RUN ls -all $HOME
+RUN echo " "
 
 
 EXPOSE 3000
