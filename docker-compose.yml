@@ -7,8 +7,9 @@ services:
     image: jbl/calendar:1.0.0
     build: 
       context: ./docker/construction/
-#       args:
-        # ENV. USINE LOGICIELLE JAUNE
+      args:
+        - PEGASUS_USER_NAME=pegasus
+        - PEGASUS_USER_PWD=pegasus
         # ADD .cle.privee.usine.jaune ./.secret
         # - YELLOW_GIT_SECRET=$YELLOW_GIT_SECRET
         
@@ -16,8 +17,11 @@ services:
 #          donc conflit de droits avec le SGF de l'hôte docker
 #     volumes:
 #       - $AVOIR:$IN_CONTAINER_WHATEVER_DIRECTORY:rw
-#     environment:
-#       - YELLOW_OPERATOR_USER_NAME=$YELLOW_OPERATOR_USER_NAME
+    environment:
+      - PEGASUS_USER_NAME=pegasus
+      - PEGASUS_USER_PWD=pegasus
+      - MONGO_URL=mongodb://calendar_mongo:27016/pegasuscalendar
+      - MONGO_OPLOG_URL=mongodb://calendar_mongo:27016/local?replicaSet=rspegasuscal
     ports:
       # - $NUM_PORT_ECOUTE_EXTERIEUR_AU_CONTENEUR:$NUM_PORT_ECOUTE_FRONTEND_APPLI_VOTE_IN_CONTAINER
       - 7000:3000
@@ -30,6 +34,30 @@ services:
       # - another_container
     networks:
       - "reseau_devops"
+    restart: always
+  calendar_mongo:
+    # image: mongo:latest
+    image: kytes.io/mongo:1.0.0    
+    build: ./docker/construction/mongodb
+    # hostname: "mongo"
+    container_name: calendar_mongo
+    volumes:
+     - ./pegasus/mongodb/data:/data/db
+     - ./pegasus/mongodb/dump:/dump
+    # ---- 
+    # - contenu "./.env" : 
+    # ---- 
+    # NOM_DU_REPLICASET_MONGO=marguerite_rs0
+    # ---- 
+    command: mongod  --port 27016 --smallfiles --oplogSize 128 --replSet rspegasuscal 
+    ports:
+      - 27025:27016
+    expose:
+      - 27016
+    networks:
+      - "reseau_devops"
+    #       devops:
+    #         ipv4_address: 192.168.160.6
     restart: always
 networks:
   # donc dans le fichier ["./.env]", on doit tropuver la déclaration de variable [NOM_DU_RESEAU_DEMO_MJML=reseau_vote_jaune]
